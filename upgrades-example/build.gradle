@@ -1,0 +1,14 @@
+//file:noinspection GroovyAssignabilityCheck
+//file:noinspection DependencyNotationArgument
+dependencies {
+    implementation project(':api')
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}

@@ -1,0 +1,39 @@
+plugins {
+    id 'java-library'
+}
+
+
+allprojects {
+    apply plugin: 'java-library'
+
+    group = 'com.filkond'
+    version = '1.0'
+
+    compileJava {
+        options.encoding = 'UTF-8'
+        sourceCompatibility = '17'
+        targetCompatibility = '17'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            name = "papermc-repo"
+            url = "https://repo.papermc.io/repository/maven-public/"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/groups/public/"
+        }
+    }
+
+    dependencies {
+        compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+        implementation group: 'com.j256.ormlite', name: 'ormlite-jdbc', version: '6.1'
+
+        compileOnly 'org.projectlombok:lombok:1.18.34'
+        annotationProcessor 'org.projectlombok:lombok:1.18.34'
+        testCompileOnly 'org.projectlombok:lombok:1.18.34'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+    }
+}
