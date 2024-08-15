@@ -15,6 +15,6 @@ public class UpgradeType {
     private final Set<UpgradeLevel> levels;
 
     public Optional<UpgradeLevel> getLevel(int level) {
-        return levels.stream().filter(l -> l.getLevel() == level).findFirst();
+        return levels.stream().filter(l -> l.getIntValue() == level).findFirst();
     }
 }

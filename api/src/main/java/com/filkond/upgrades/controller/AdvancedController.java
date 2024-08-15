@@ -25,7 +25,7 @@ public abstract class AdvancedController<E> extends UpgradeController {
     public <T extends UpgradeBuff<?>> Set<T> getLevelBuffs(final E entity, String buffId, Class<T> clazz, UpgradeType type) {
         val holder = getHolderOrDefault(entity);
         return type.getLevels().stream()
-                .filter(level -> holder.getLevel(type) == level.getLevel())
+                .filter(level -> holder.getLevel(type) == level.getIntValue())
                 .flatMap(level -> level.getBuffs().stream())
                 .filter(buff -> buffId.equals(buff.getId()))
                 .filter(clazz::isInstance)
@@ -42,7 +42,7 @@ public abstract class AdvancedController<E> extends UpgradeController {
     public <T extends UpgradeBuff<?>> Set<T> getAllBuffs(final E entity, String buffId, Class<T> clazz, UpgradeType type) {
         val holder = getHolderOrDefault(entity);
         return type.getLevels().stream()
-                .filter(level -> holder.getLevel(type) <= level.getLevel())
+                .filter(level -> holder.getLevel(type) <= level.getIntValue())
                 .flatMap(level -> level.getBuffs().stream())
                 .filter(buff -> buffId.equals(buff.getId()))
                 .filter(clazz::isInstance)

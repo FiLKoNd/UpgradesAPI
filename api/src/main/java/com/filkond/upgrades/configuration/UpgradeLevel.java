@@ -11,6 +11,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class UpgradeLevel {
-    private final int level;
+    private final int intValue;
     private final Set<UpgradeBuff<?>> buffs;
 }

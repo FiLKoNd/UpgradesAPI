@@ -1,4 +1,4 @@
 name: Upgrades-Example
 description: Example plugin for upgrading
-main: com.filkond.upgrades.UpgradesExample
+main: com.filkond.upgrades_example.UpgradesExample
 version: '${version}'

@@ -1,7 +1,16 @@
 //file:noinspection GroovyAssignabilityCheck
 //file:noinspection DependencyNotationArgument
+plugins {
+    id 'com.gradleup.shadow' version '8.3.0'
+}
+
+repositories {
+    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+}
+
 dependencies {
     implementation project(':api')
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
 }
 
 processResources {
