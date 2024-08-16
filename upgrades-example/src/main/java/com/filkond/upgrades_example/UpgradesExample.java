@@ -6,6 +6,7 @@ import com.filkond.upgrades_example.listener.PlayerListener;
 import com.filkond.upgrades_example.command.UpgradeExecutor;
 import com.filkond.upgrades.db.MariaDBCredentials;
 import lombok.Getter;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class UpgradesExample extends JavaPlugin {
     public void onEnable() {
         INSTANCE = this;
         MariaDBCredentials credentials = new MariaDBCredentials("upgrades", "localhost", "filkond", "1230");
-        controller = new PlayerUpgradesController(credentials);
+        controller = new PlayerUpgradesController(PlayerHolder.class, credentials);
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
         PaperCommandManager manager = new PaperCommandManager(this);

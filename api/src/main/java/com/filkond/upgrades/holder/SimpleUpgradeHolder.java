@@ -5,6 +5,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -12,11 +13,11 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @DatabaseTable(tableName = "upgrade_holders", daoClass = UpgradeHolderDAOImpl.class)
-public class SimpleUpgradeHolder implements AdvancedHolder {
+public abstract class SimpleUpgradeHolder implements UpgradeHolder {
     @DatabaseField(generatedId = true)
     private long id;
 

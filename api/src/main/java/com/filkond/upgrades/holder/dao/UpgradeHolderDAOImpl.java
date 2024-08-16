@@ -1,6 +1,6 @@
 package com.filkond.upgrades.holder.dao;
 
-import com.filkond.upgrades.holder.SimpleUpgradeHolder;
+import com.filkond.upgrades.holder.UpgradeHolder;
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
 import lombok.SneakyThrows;
@@ -12,21 +12,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-public class UpgradeHolderDAOImpl extends BaseDaoImpl<SimpleUpgradeHolder, Long> implements UpgradeHolderDAO {
-    public UpgradeHolderDAOImpl(ConnectionSource connectionSource) throws SQLException {
-        super(connectionSource, SimpleUpgradeHolder.class);
+public class UpgradeHolderDAOImpl<H extends UpgradeHolder> extends BaseDaoImpl<H, Long> implements UpgradeHolderDAO<H> {
+    public UpgradeHolderDAOImpl(ConnectionSource connectionSource, Class<H> dataClass) throws SQLException {
+        super(connectionSource, dataClass);
     }
 
     @Override
     @SneakyThrows
-    public @NotNull Optional<SimpleUpgradeHolder> getByUniqueId(@NotNull UUID uniqueId) {
+    public @NotNull Optional<H> getByUniqueId(@NotNull UUID uniqueId) {
         var holders = queryForEq("uuid", uniqueId);
         return holders.stream().findFirst();
     }
 
     @Override
     @SneakyThrows
-    public @NotNull Set<SimpleUpgradeHolder> getAll() {
+    public @NotNull Set<H> getAll() {
         return new HashSet<>(queryForAll());
     }
 }

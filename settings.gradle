@@ -1,4 +1,5 @@
 rootProject.name = 'UpgradesAPI'
 include 'api'
 include 'upgrades-example'
+include 'advanced'
 

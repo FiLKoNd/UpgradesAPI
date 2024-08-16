@@ -2,8 +2,9 @@ package com.filkond.upgrades.holder;
 
 import com.filkond.upgrades.configuration.UpgradeType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public interface AdvancedHolder extends UpgradeHolder {
+public interface AdvancedHolder<E> extends UpgradeHolder {
     default int getLevel(@NotNull String key) {
         return getProgresses().getOrDefault(key, 0);
     }
@@ -31,4 +32,6 @@ public interface AdvancedHolder extends UpgradeHolder {
     default void setLevel(@NotNull UpgradeType type, int level) {
         setLevel(type.getId(), level);
     }
+
+    @Nullable E getEntity();
 }
