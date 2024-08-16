@@ -3,10 +3,8 @@ package com.filkond.upgrades.controller;
 import com.filkond.upgrades.configuration.UpgradeType;
 import com.filkond.upgrades.configuration.buff.UpgradeBuff;
 import com.filkond.upgrades.holder.AdvancedHolder;
-import lombok.val;  
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public interface AdvancedController<H extends AdvancedHolder<E>, E>{
     Optional<H> getHolder(E entity);

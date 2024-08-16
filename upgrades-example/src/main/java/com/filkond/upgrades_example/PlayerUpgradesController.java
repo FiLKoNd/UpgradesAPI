@@ -4,7 +4,7 @@ import com.filkond.upgrades.configuration.UpgradeLevel;
 import com.filkond.upgrades.configuration.UpgradeType;
 import com.filkond.upgrades.configuration.buff.DoubleBuff;
 import com.filkond.upgrades.configuration.buff.IntegerBuff;
-import com.filkond.upgrades.controller.AdvancedControllerImpl;
+import com.filkond.upgrades.controller.AbstractAdvancedController;
 import com.filkond.upgrades.db.DatabaseCredentials;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 @Getter
-public class PlayerUpgradesController extends AdvancedControllerImpl<PlayerHolder, Player> {
+public class PlayerUpgradesController extends AbstractAdvancedController<PlayerHolder, Player> {
     private final Set<UpgradeType> upgradeTypes = Set.of(UpgradeType.builder()
                     .id("test")
                     .levels(Set.of(

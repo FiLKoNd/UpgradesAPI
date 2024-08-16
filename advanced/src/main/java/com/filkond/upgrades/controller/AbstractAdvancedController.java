@@ -11,12 +11,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class AdvancedControllerImpl<H extends AdvancedHolder<E>, E> extends UpgradeControllerImpl<H> implements AdvancedController<H, E> {
-    public AdvancedControllerImpl(Class<H> holderClass) {
+public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E> extends AbstractUpgradeController<H> implements AdvancedController<H, E> {
+    public AbstractAdvancedController(Class<H> holderClass) {
         super(holderClass);
     }
 
-    public AdvancedControllerImpl(Class<H> holderClass, @NotNull DatabaseCredentials credentials) {
+    public AbstractAdvancedController(Class<H> holderClass, @NotNull DatabaseCredentials credentials) {
         super(holderClass, credentials);
     }
 

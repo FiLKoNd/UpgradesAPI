@@ -13,12 +13,12 @@ import java.util.*;
 
 @Getter
 @RequiredArgsConstructor
-public abstract class UpgradeControllerImpl<H extends UpgradeHolder> implements UpgradeController<H> {
+public abstract class AbstractUpgradeController<H extends UpgradeHolder> implements UpgradeController<H> {
     private UpgradeHolderDAO<H> holdersDAO;
     protected final Set<H> holders = new HashSet<>();
     private final Class<H> holderClass;
 
-    public UpgradeControllerImpl(Class<H> holderClass, @NotNull DatabaseCredentials credentials) {
+    public AbstractUpgradeController(Class<H> holderClass, @NotNull DatabaseCredentials credentials) {
         this.holderClass = holderClass;
         initialize(credentials);
     }
