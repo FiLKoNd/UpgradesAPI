@@ -6,7 +6,6 @@ import com.filkond.upgrades_example.listener.PlayerListener;
 import com.filkond.upgrades_example.command.UpgradeExecutor;
 import com.filkond.upgrades.db.MariaDBCredentials;
 import lombok.Getter;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.stream.Collectors;
