@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E> extends AbstractUpgradeController<H> implements AdvancedController<H, E> {
+public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E> extends UpgradeControllerImpl<H> implements AdvancedController<H, E> {
     public AbstractAdvancedController(Class<H> holderClass) {
         super(holderClass);
     }
