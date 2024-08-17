@@ -1,6 +1,7 @@
 package com.filkond.upgrades_example;
 
 import co.aikar.commands.*;
+import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.UpgradeType;
 import com.filkond.upgrades_example.listener.PlayerListener;
 import com.filkond.upgrades_example.command.UpgradeExecutor;
@@ -32,10 +33,10 @@ public class UpgradesExample extends JavaPlugin {
 
         CommandCompletions<BukkitCommandCompletionContext> completions = manager.getCommandCompletions();
         completions.registerCompletion("types", ctx -> controller.getUpgradeTypes().stream()
-                .map(UpgradeType::getId)
+                .map(SimpleUpgradeType::getId)
                 .collect(Collectors.toList()));
 
-        completions.registerCompletion("level", ctx -> ctx.getContextValue(UpgradeType.class).getLevels().stream()
+        completions.registerCompletion("level", ctx -> ctx.getContextValue(SimpleUpgradeType.class).getLevels().stream()
                 .map(lvl -> String.valueOf(lvl.getIntValue()))
                 .toList());
         manager.registerCommand(new UpgradeExecutor(controller));

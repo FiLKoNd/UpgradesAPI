@@ -1,5 +1,6 @@
 package com.filkond.upgrades.holder;
 
+import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.UpgradeType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +22,7 @@ public interface AdvancedHolder<E> extends UpgradeHolder {
         getProgresses().clear();
     }
 
-    default void resetProgress(@NotNull UpgradeType type) {
+    default void resetProgress(@NotNull SimpleUpgradeType type) {
         resetProgress(type.getId());
     }
 
