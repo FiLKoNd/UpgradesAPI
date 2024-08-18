@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 @Getter
-public class PlayerUpgradesController extends AbstractAdvancedController<PlayerHolder, Player> {
+public class PlayerUpgradesController extends AbstractAdvancedController<PlayerHolder, Player, SimpleUpgradeType> {
     private final Set<SimpleUpgradeType> upgradeTypes = Set.of(SimpleUpgradeType.builder()
                     .id("test")
                     .levels(Set.of(

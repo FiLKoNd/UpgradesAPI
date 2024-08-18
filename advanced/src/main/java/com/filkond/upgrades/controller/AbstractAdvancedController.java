@@ -13,8 +13,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E> extends UpgradeControllerImpl<H>
-        implements AdvancedController<H, E>, BuffController<E> {
+public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E, T extends UpgradeType> extends UpgradeControllerImpl<H>
+        implements AdvancedController<H, E, T>, BuffController<E> {
     public AbstractAdvancedController(Class<H> holderClass) {
         super(holderClass);
     }
@@ -40,39 +40,39 @@ public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E>
     }
 
     @Override
-    public <T extends UpgradeBuff<?>> Set<T> getLevelBuffs(final E entity, String buffId, Class<T> clazz, UpgradeType type) {
+    public <B extends UpgradeBuff<?>> Set<B> getLevelBuffs(final E entity, String buffId, Class<B> clazz, UpgradeType type) {
         val holder = getHolderOrDefault(entity);
         return getCollector(buffId, clazz, true, type).collect(holder);
     }
 
     @Override
-    public <T extends UpgradeBuff<?>> Set<T> getLevelBuffs(final E entity, String buffId, Class<T> clazz) {
+    public <B extends UpgradeBuff<?>> Set<B> getLevelBuffs(final E entity, String buffId, Class<B> clazz) {
         return getUpgradeTypes().stream()
                 .flatMap(type -> getLevelBuffs(entity, buffId, clazz, type).stream())
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public <T extends UpgradeBuff<?>> Set<T> getAllBuffs(final E entity, String buffId, Class<T> clazz, UpgradeType type) {
+    public <B extends UpgradeBuff<?>> Set<B> getAllBuffs(final E entity, String buffId, Class<B> clazz, UpgradeType type) {
         val holder = getHolderOrDefault(entity);
         return getCollector(buffId, clazz, true, type).collect(holder);
     }
 
     @Override
-    public <T extends UpgradeBuff<?>> Set<T> getAllBuffs(final E entity, String buffId, Class<T> clazz) {
+    public <B extends UpgradeBuff<?>> Set<B> getAllBuffs(final E entity, String buffId, Class<B> clazz) {
         return getUpgradeTypes().stream()
                 .flatMap(type -> getAllBuffs(entity, buffId, clazz, type).stream())
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public Optional<? extends UpgradeType> getUpgradeType(final String id) {
+    public Optional<T> getUpgradeType(final String id) {
         return getUpgradeTypes().stream().filter(type -> type.getId().equals(id)).findFirst();
     }
 
     @Override
-    public <T extends UpgradeBuff<?>> BuffCollector<T> getCollector(String buffId, Class<T> clazz, boolean certainLevel, UpgradeType... exceptions) {
-        return BuffCollector.<T>builder()
+    public <B extends UpgradeBuff<?>> BuffCollector<B> getCollector(String buffId, Class<B> clazz, boolean certainLevel, UpgradeType... exceptions) {
+        return BuffCollector.<B>builder()
                 .clazz(clazz)
                 .buffId(buffId)
                 .certainLevel(certainLevel)

@@ -5,14 +5,14 @@ import com.filkond.upgrades.holder.AdvancedHolder;
 
 import java.util.*;
 
-public interface AdvancedController<H extends AdvancedHolder<E>, E> extends BuffController<E> {
+public interface AdvancedController<H extends AdvancedHolder<E>, E, T extends UpgradeType> extends BuffController<E> {
     Optional<H> getHolder(E entity);
 
     H getHolderOrDefault(E entity);
 
-    Optional<? extends UpgradeType> getUpgradeType(String id);
+    Optional<T> getUpgradeType(String id);
 
     H getDefaultHolder(final E entity);
 
-    Set<? extends UpgradeType> getUpgradeTypes();
+    Set<T> getUpgradeTypes();
 }
