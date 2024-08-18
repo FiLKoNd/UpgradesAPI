@@ -1,6 +1,7 @@
 package com.filkond.upgrades.configuration;
 
 import java.util.Optional;
+import java.util.Set;
 
 public interface UpgradeType {
     Optional<UpgradeLevel> getMaxLevel();
@@ -9,5 +10,5 @@ public interface UpgradeType {
 
     String getId();
 
-    java.util.Set<UpgradeLevel> getLevels();
+    Set<UpgradeLevel> getLevels();
 }
