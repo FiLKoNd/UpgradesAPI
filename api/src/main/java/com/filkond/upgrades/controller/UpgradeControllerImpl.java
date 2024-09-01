@@ -1,6 +1,7 @@
 package com.filkond.upgrades.controller;
 
 import com.filkond.upgrades.db.DatabaseCredentials;
+import com.filkond.upgrades.db.RemoteDatabaseCredentials;
 import com.filkond.upgrades.holder.UpgradeHolder;
 import com.filkond.upgrades.holder.dao.UpgradeHolderDAO;
 import com.j256.ormlite.dao.DaoManager;

@@ -3,12 +3,14 @@ package com.filkond.upgrades_example;
 import co.aikar.commands.*;
 import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.UpgradeType;
+import com.filkond.upgrades.db.SqliteCredentials;
 import com.filkond.upgrades_example.listener.PlayerListener;
 import com.filkond.upgrades_example.command.UpgradeExecutor;
-import com.filkond.upgrades.db.MariaDBCredentials;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.stream.Collectors;
 
 @Getter
@@ -17,9 +19,13 @@ public class UpgradesExample extends JavaPlugin {
     private PlayerUpgradesController controller;
 
     @Override
+    @SneakyThrows
     public void onEnable() {
         INSTANCE = this;
-        MariaDBCredentials credentials = new MariaDBCredentials("upgrades", "localhost", "filkond", "1230");
+        File file = new File(this.getDataFolder(), "db.sqlite");
+        if (!file.exists())
+            saveResource("db.sqlite", false);
+        SqliteCredentials credentials = new SqliteCredentials(file, "sputnikfort", "1234");
         controller = new PlayerUpgradesController(PlayerHolder.class, credentials);
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 

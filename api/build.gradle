@@ -1,7 +1,9 @@
+
 repositories {
 }
 
 dependencies {
     implementation "org.mariadb.jdbc:mariadb-java-client:2.1.2"
     testImplementation "org.mariadb.jdbc:mariadb-java-client:2.1.2"
+    implementation 'org.xerial:sqlite-jdbc:3.46.1.0'
 }

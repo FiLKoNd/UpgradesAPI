@@ -6,6 +6,7 @@ import com.filkond.upgrades.configuration.buff.DoubleBuff;
 import com.filkond.upgrades.configuration.buff.IntegerBuff;
 import com.filkond.upgrades.controller.AbstractAdvancedController;
 import com.filkond.upgrades.db.DatabaseCredentials;
+import com.filkond.upgrades.db.RemoteDatabaseCredentials;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

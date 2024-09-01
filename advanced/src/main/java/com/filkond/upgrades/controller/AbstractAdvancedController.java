@@ -1,9 +1,10 @@
 package com.filkond.upgrades.controller;
 
 import com.filkond.upgrades.configuration.UpgradeType;
+import com.filkond.upgrades.db.DatabaseCredentials;
 import com.filkond.upgrades.utils.BuffCollector;
 import com.filkond.upgrades.configuration.buff.UpgradeBuff;
-import com.filkond.upgrades.db.DatabaseCredentials;
+import com.filkond.upgrades.db.RemoteDatabaseCredentials;
 import com.filkond.upgrades.holder.AdvancedHolder;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
