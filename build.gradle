@@ -2,10 +2,11 @@
 //file:noinspection DependencyNotationArgument
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 
-allprojects {
+subprojects {
     apply plugin: 'java-library'
 
     group = 'com.filkond'
@@ -15,6 +16,27 @@ allprojects {
         options.encoding = 'UTF-8'
         sourceCompatibility = '17'
         targetCompatibility = '17'
+    }
+
+    if (!project.name.contains('example')) {
+        publishing {
+            publications {
+                "$project.name"(MavenPublication) {
+                    from components.java
+                    artifactId = project.name.toLowerCase()
+                    groupId = project.group.toLowerCase()
+                    version = project.version.toLowerCase()
+                    pom {
+                        developers {
+                            developer {
+                                id = 'FiLKoNd'
+                                email = 'fil.yt.pass@gmail.com'
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     repositories {
@@ -37,5 +59,18 @@ allprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.34'
         testCompileOnly 'org.projectlombok:lombok:1.18.34'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = 'https://maven.pkg.github.com/FiLKoNd/UpgradesAPI'
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
