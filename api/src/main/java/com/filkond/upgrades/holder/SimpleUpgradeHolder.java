@@ -5,7 +5,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -13,19 +12,22 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @DatabaseTable(tableName = "upgrade_holders", daoClass = UpgradeHolderDAOImpl.class)
 public abstract class SimpleUpgradeHolder implements UpgradeHolder {
+    public SimpleUpgradeHolder(UUID uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
     @DatabaseField(generatedId = true)
     private long id;
 
     @DatabaseField(columnName = "uuid", unique = true, canBeNull = false)
-    private UUID uniqueId;
+    protected UUID uniqueId;
 
     @DatabaseField(columnName = "progress", dataType = DataType.SERIALIZABLE, canBeNull = false)
-    private final HashMap<String, Integer> progresses = new HashMap<>();
+    protected final HashMap<String, Integer> progresses = new HashMap<>();
 
     @Override
     public boolean equals(Object o) {

@@ -43,8 +43,6 @@ public class PlayerUpgradesController extends AbstractAdvancedController<PlayerH
 
     @Override
     public PlayerHolder getDefaultHolder(Player entity) {
-        return PlayerHolder.builder()
-                .uniqueId(entity.getUniqueId())
-                .build();
+        return new PlayerHolder(entity.getUniqueId());
     }
 }
