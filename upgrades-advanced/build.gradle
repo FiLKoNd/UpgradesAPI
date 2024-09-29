@@ -1,5 +1,5 @@
 //file:noinspection GroovyAssignabilityCheck
 //file:noinspection DependencyNotationArgument
 dependencies {
-    compileOnly project(":api")
+    compileOnly project(":upgrades-api")
 }

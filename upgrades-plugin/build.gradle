@@ -1,15 +1,19 @@
 plugins {
-    id 'com.gradleup.shadow' version '8.3.0'
+    id 'java'
 }
 
+group = 'com.filkond'
+version = 'unspecified'
+
 repositories {
-    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    mavenCentral()
 }
 
 dependencies {
     implementation project(':upgrades-api')
     implementation project(':upgrades-advanced')
-    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 processResources {
@@ -19,4 +23,8 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+test {
+    useJUnitPlatform()
 }

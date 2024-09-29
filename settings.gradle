@@ -1,5 +1,10 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
 rootProject.name = 'UpgradesAPI'
-include 'api'
+include 'upgrades-api'
 include 'upgrades-example'
-include 'advanced'
+include 'upgrades-advanced'
+include 'upgrades-plugin'
+include 'upgrades-plugin'
 

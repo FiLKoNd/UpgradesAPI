@@ -18,7 +18,7 @@ subprojects {
         targetCompatibility = '17'
     }
 
-    if (!project.name.contains('example')) {
+    if (!project.name.contains('example') && !project.name.contains('plugin')) {
         publishing {
             publications {
                 "$project.name"(MavenPublication) {
