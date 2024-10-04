@@ -10,7 +10,7 @@ subprojects {
     apply plugin: 'java-library'
 
     group = 'com.filkond'
-    version = '1.0'
+    version = '1.0.1'
 
     compileJava {
         options.encoding = 'UTF-8'
