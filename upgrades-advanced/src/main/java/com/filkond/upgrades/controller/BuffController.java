@@ -7,13 +7,13 @@ import com.filkond.upgrades.utils.BuffCollector;
 import java.util.Set;
 
 public interface BuffController<E> {
-    <T extends UpgradeBuff<?>> Set<T> getLevelBuffs(E entity, String buffId, Class<T> clazz, UpgradeType type);
+    <T> Set<UpgradeBuff<T>> getLevelBuffs(E entity, String buffId, Class<T> clazz, UpgradeType type);
 
-    <T extends UpgradeBuff<?>> Set<T> getLevelBuffs(E entity, String buffId, Class<T> clazz);
+    <T> Set<UpgradeBuff<T>> getLevelBuffs(E entity, String buffId, Class<T> clazz);
 
-    <T extends UpgradeBuff<?>> Set<T> getAllBuffs(E entity, String buffId, Class<T> clazz, UpgradeType type);
+    <T> Set<UpgradeBuff<T>> getAllBuffs(E entity, String buffId, Class<T> clazz, UpgradeType type);
 
-    <T extends UpgradeBuff<?>> Set<T> getAllBuffs(E entity, String buffId, Class<T> clazz);
+    <T> Set<UpgradeBuff<T>> getAllBuffs(E entity, String buffId, Class<T> clazz);
 
-    <T extends UpgradeBuff<?>> BuffCollector<T> getCollector(String buffId, Class<T> clazz, boolean certainLevel, UpgradeType... exceptions);
+    <T> BuffCollector<T> getCollector(String buffId, Class<T> clazz, boolean certainLevel, UpgradeType... exceptions);
 }

@@ -2,8 +2,7 @@ package com.filkond.upgrades_example;
 
 import com.filkond.upgrades.configuration.SimpleUpgradeLevel;
 import com.filkond.upgrades.configuration.SimpleUpgradeType;
-import com.filkond.upgrades.configuration.buff.DoubleBuff;
-import com.filkond.upgrades.configuration.buff.IntegerBuff;
+import com.filkond.upgrades.configuration.buff.UpgradeBuff;
 import com.filkond.upgrades.controller.AbstractAdvancedController;
 import com.filkond.upgrades.db.DatabaseCredentials;
 import lombok.Getter;
@@ -19,25 +18,25 @@ public class PlayerUpgradesController extends AbstractAdvancedController<PlayerH
                     .levels(Set.of(
                             SimpleUpgradeLevel.builder()
                                     .intValue(1)
-                                    .buffs(Set.of(new DoubleBuff("increase_damage", 1.2D), new IntegerBuff("increase_hp", 4))).build(),
+                                    .buffs(Set.of(new UpgradeBuff<>("increase_damage", 1.2D), new UpgradeBuff<>("increase_hp", 4))).build(),
                             SimpleUpgradeLevel.builder()
                                     .intValue(2)
-                                    .buffs(Set.of(new DoubleBuff("increase_damage", 2D), new IntegerBuff("increase_hp", 8))).build()
+                                    .buffs(Set.of(new UpgradeBuff<>("increase_damage", 2D), new UpgradeBuff<>("increase_hp", 8))).build()
                     )).build(),
             SimpleUpgradeType.builder()
                     .id("test2")
                     .levels(Set.of(
                             SimpleUpgradeLevel.builder()
                                             .intValue(1)
-                                            .buffs(Set.of(new DoubleBuff("increase_damage", 1.2D), new IntegerBuff("increase_hp", 5))).build(),
+                                            .buffs(Set.of(new UpgradeBuff<>("increase_damage", 1.2D), new UpgradeBuff<>("increase_hp", 5))).build(),
                             SimpleUpgradeLevel.builder()
                                             .intValue(2)
-                                            .buffs(Set.of(new DoubleBuff("increase_damage", 5D), new IntegerBuff("increase_hp", 5))).build()
+                                            .buffs(Set.of(new UpgradeBuff<>("increase_damage", 5D), new UpgradeBuff<>("increase_hp", 5))).build()
                             )
                     ).build()
     );
 
-    public PlayerUpgradesController(Class<PlayerHolder> holderClass, @NotNull DatabaseCredentials credentials) {
+    public PlayerUpgradesController(@NotNull Class<PlayerHolder> holderClass, @NotNull DatabaseCredentials credentials) {
         super(holderClass, credentials);
     }
 

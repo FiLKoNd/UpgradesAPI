@@ -1,8 +1,6 @@
 package com.filkond.upgrades_example.listener;
 
 import com.filkond.upgrades_example.UpgradesExample;
-import com.filkond.upgrades.configuration.buff.DoubleBuff;
-import com.filkond.upgrades.configuration.buff.IntegerBuff;
 import com.filkond.upgrades.configuration.buff.UpgradeBuff;
 import lombok.val;
 import org.bukkit.attribute.Attribute;
@@ -19,7 +17,7 @@ public class PlayerListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         val controller = UpgradesExample.getInstance().getController();
         Player player = event.getPlayer();
-        int buff = controller.getAllBuffs(player, "increase_hp", IntegerBuff.class)
+        int buff = controller.getAllBuffs(player, "increase_hp", Integer.class)
                 .stream()
                 .mapToInt(UpgradeBuff::getValue)
                 .sum();
@@ -34,7 +32,7 @@ public class PlayerListener implements Listener {
         Entity damager = event.getDamager();
         if (!(damager instanceof Player player)) return;
         val controller = UpgradesExample.getInstance().getController();
-        double buff = controller.getAllBuffs(player, "increase_damage", DoubleBuff.class)
+        double buff = controller.getAllBuffs(player, "increase_damage", Double.class)
                 .stream()
                 .mapToDouble(UpgradeBuff::getValue)
                 .reduce(1, (v, v1) -> v * v1);
