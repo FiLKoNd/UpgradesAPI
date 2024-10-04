@@ -13,16 +13,17 @@ import java.util.stream.Collectors;
 
 @Getter
 public class UpgradesExample extends JavaPlugin {
-    private static UpgradesExample INSTANCE;
     private PlayerUpgradesController controller;
 
     @Override
     public void onEnable() {
-        INSTANCE = this;
         MariaDBCredentials credentials = new MariaDBCredentials("upgrades", "localhost", "filkond", "1230");
         controller = new PlayerUpgradesController(PlayerHolder.class, credentials);
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(controller), this);
+        registerCommand();
+    }
 
+    private void registerCommand() {
         PaperCommandManager manager = new PaperCommandManager(this);
         CommandContexts<BukkitCommandExecutionContext> contexts = manager.getCommandContexts();
         contexts.registerContext(UpgradeType.class, ctx -> {
@@ -45,9 +46,5 @@ public class UpgradesExample extends JavaPlugin {
     @Override
     public void onDisable() {
         controller.save();
-    }
-
-    public static UpgradesExample getInstance() {
-        return INSTANCE;
     }
 }
