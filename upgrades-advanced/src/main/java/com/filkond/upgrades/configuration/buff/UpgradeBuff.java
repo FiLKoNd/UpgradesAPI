@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public abstract class UpgradeBuff<V> {
+public class UpgradeBuff<V> {
     private final String id;
     private final V value;
 }
