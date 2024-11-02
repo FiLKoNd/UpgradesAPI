@@ -3,7 +3,6 @@ package com.filkond.upgrades_example.command;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.UpgradeType;
 import com.filkond.upgrades_example.PlayerUpgradesController;
 import org.bukkit.command.CommandSender;

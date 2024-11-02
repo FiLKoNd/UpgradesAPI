@@ -19,18 +19,27 @@ public class BuffCollector<T> {
     private final boolean certainLevel;
     private final Collection<? extends UpgradeType> toSearch;
     @Builder.Default
-    private final Collection<? extends UpgradeType> exceptions = new HashSet<>();
+    private final Collection<? extends UpgradeType> reversed = new HashSet<>();
+    @Builder.Default
+    private final Collection<? extends UpgradeType> exclude = new HashSet<>();
+    @Builder.Default
+    private final Collection<? extends UpgradeType> include = new HashSet<>();
 
     @SuppressWarnings("unchecked")
     public Set<UpgradeBuff<T>> collect(AdvancedHolder<?> holder) {
+        if (!exclude.isEmpty() && !include.isEmpty()) {
+            throw new IllegalArgumentException("Cannot use both exclude and include");
+        }
         return toSearch.stream()
+                .filter(type -> !exclude.contains(type) || include.contains(type))
                 .flatMap(type -> {
-                    if (certainLevel ^ exceptions.contains(type)) return type.getLevels().stream().filter(level -> holder.getLevel(type) == level.getIntValue());
+                    if (certainLevel ^ reversed.contains(type))
+                        return type.getLevels().stream().filter(level -> holder.getLevel(type) == level.getIntValue());
                     return type.getLevels().stream().filter(level -> holder.getLevel(type) >= level.getIntValue());
                 })
                 .flatMap(level -> level.getBuffs().stream())
                 .filter(buff -> buffId.equals(buff.getId()))
-                .filter(upgradeBuff -> upgradeBuff.getValue().getClass().isInstance(clazz))
+                .filter(upgradeBuff -> clazz.isInstance(upgradeBuff.getValue()))
                 .map(upgradeBuff -> (UpgradeBuff<T>) upgradeBuff)
                 .collect(Collectors.toSet());
     }

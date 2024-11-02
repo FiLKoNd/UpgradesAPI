@@ -1,12 +1,11 @@
 package com.filkond.upgrades.controller;
 
 import com.filkond.upgrades.configuration.UpgradeType;
+import com.filkond.upgrades.datasource.UpgradesDataSource;
 import com.filkond.upgrades.utils.BuffCollector;
 import com.filkond.upgrades.configuration.buff.UpgradeBuff;
-import com.filkond.upgrades.db.DatabaseCredentials;
 import com.filkond.upgrades.holder.AdvancedHolder;
 import lombok.val;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -15,12 +14,8 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E, T extends UpgradeType> extends UpgradeControllerImpl<H>
         implements AdvancedController<H, E, T>, BuffController<E> {
-    public AbstractAdvancedController(Class<H> holderClass) {
-        super(holderClass);
-    }
-
-    public AbstractAdvancedController(Class<H> holderClass, @NotNull DatabaseCredentials credentials) {
-        super(holderClass, credentials);
+    public AbstractAdvancedController(UpgradesDataSource<H> dataSource, Class<H> holderClass) {
+        super(dataSource, holderClass);
     }
 
     @Override
@@ -71,13 +66,13 @@ public abstract class AbstractAdvancedController<H extends AdvancedHolder<E>, E,
     }
 
     @Override
-    public <B> BuffCollector<B> getCollector(String buffId, Class<B> clazz, boolean certainLevel, UpgradeType... exceptions) {
+    public <B> BuffCollector<B> getCollector(String buffId, Class<B> clazz, boolean certainLevel, UpgradeType... reversed) {
         return BuffCollector.<B>builder()
                 .clazz(clazz)
                 .buffId(buffId)
                 .certainLevel(certainLevel)
                 .toSearch(getUpgradeTypes())
-                .exceptions(Arrays.stream(exceptions).collect(Collectors.toSet()))
+                .reversed(Arrays.stream(reversed).collect(Collectors.toSet()))
                 .build();
     }
 }

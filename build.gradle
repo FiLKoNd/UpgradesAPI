@@ -5,12 +5,16 @@ plugins {
     id 'maven-publish'
 }
 
-
 subprojects {
     apply plugin: 'java-library'
 
     group = 'com.filkond'
-    version = '1.0.1'
+    version = '1.0.2'
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
 
     compileJava {
         options.encoding = 'UTF-8'

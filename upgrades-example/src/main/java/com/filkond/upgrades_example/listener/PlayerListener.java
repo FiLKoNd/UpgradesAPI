@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
+import java.util.Set;
+
 public class PlayerListener implements Listener {
 
     private final PlayerUpgradesController controller;
@@ -35,7 +37,8 @@ public class PlayerListener implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         if (!(damager instanceof Player player)) return;
-        double buff = controller.getAllBuffs(player, "increase_damage", Double.class)
+        Set<UpgradeBuff<Double>> buffs = controller.getAllBuffs(player, "increase_damage", Double.class);
+        double buff = buffs
                 .stream()
                 .mapToDouble(UpgradeBuff::getValue)
                 .reduce(1, (v, v1) -> v * v1);

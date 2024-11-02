@@ -3,6 +3,7 @@ package com.filkond.upgrades_example;
 import co.aikar.commands.*;
 import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.UpgradeType;
+import com.filkond.upgrades.datasource.DBUpdateDataSource;
 import com.filkond.upgrades_example.listener.PlayerListener;
 import com.filkond.upgrades_example.command.UpgradeExecutor;
 import com.filkond.upgrades.db.MariaDBCredentials;
@@ -17,8 +18,8 @@ public class UpgradesExample extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        MariaDBCredentials credentials = new MariaDBCredentials("upgrades", "localhost", "filkond", "1230");
-        controller = new PlayerUpgradesController(PlayerHolder.class, credentials);
+        MariaDBCredentials credentials = new MariaDBCredentials("upgrades", "localhost", "root", "1230");
+        controller = new PlayerUpgradesController(new DBUpdateDataSource<>(credentials, PlayerHolder.class));
         getServer().getPluginManager().registerEvents(new PlayerListener(controller), this);
         registerCommand();
     }
@@ -37,7 +38,7 @@ public class UpgradesExample extends JavaPlugin {
                 .map(SimpleUpgradeType::getId)
                 .collect(Collectors.toList()));
 
-        completions.registerCompletion("level", ctx -> ctx.getContextValue(SimpleUpgradeType.class).getLevels().stream()
+        completions.registerCompletion("level", ctx -> ctx.getContextValue(UpgradeType.class).getLevels().stream()
                 .map(lvl -> String.valueOf(lvl.getIntValue()))
                 .toList());
         manager.registerCommand(new UpgradeExecutor(controller));

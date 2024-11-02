@@ -1,21 +1,16 @@
 package com.filkond.upgrades.controller;
 
-import com.filkond.upgrades.db.DatabaseCredentials;
+import com.filkond.upgrades.datasource.UpgradesDataSource;
 import com.filkond.upgrades.holder.UpgradeHolder;
-import com.filkond.upgrades.holder.dao.UpgradeHolderDAO;
-import lombok.SneakyThrows;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
 public interface UpgradeController<H extends UpgradeHolder> {
-    @SneakyThrows
-    void initialize(@NotNull DatabaseCredentials credentials);
+    void initialize();
 
-    @SneakyThrows
     void save();
 
-    UpgradeHolderDAO<H> getHoldersDAO();
+    UpgradesDataSource<H> getDataSource();
 
     Set<H> getHolders();
 

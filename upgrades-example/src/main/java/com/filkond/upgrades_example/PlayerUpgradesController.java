@@ -4,10 +4,9 @@ import com.filkond.upgrades.configuration.SimpleUpgradeLevel;
 import com.filkond.upgrades.configuration.SimpleUpgradeType;
 import com.filkond.upgrades.configuration.buff.UpgradeBuff;
 import com.filkond.upgrades.controller.AbstractAdvancedController;
-import com.filkond.upgrades.db.DatabaseCredentials;
+import com.filkond.upgrades.datasource.UpgradesDataSource;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -36,8 +35,8 @@ public class PlayerUpgradesController extends AbstractAdvancedController<PlayerH
                     ).build()
     );
 
-    public PlayerUpgradesController(@NotNull Class<PlayerHolder> holderClass, @NotNull DatabaseCredentials credentials) {
-        super(holderClass, credentials);
+    public PlayerUpgradesController(UpgradesDataSource<PlayerHolder> dataSource) {
+        super(dataSource, PlayerHolder.class);
     }
 
     @Override
