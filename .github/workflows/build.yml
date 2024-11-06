@@ -21,4 +21,4 @@ jobs:
                   prerelease: true
                   title: Dev Build
                   files: |
-                      ./upgrades-plugin/build/libs/upgrades-plugin.jar
+                      ./upgrades-plugin/build/libs/upgrades-plugin-*-all.jar
