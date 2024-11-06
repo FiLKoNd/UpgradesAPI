@@ -1,3 +1,4 @@
 name: UpgradesAPI
 main: com.filkond.upgrades.UpgradesPlugin
 version: '${version}'
+apiVersion: 1.16
