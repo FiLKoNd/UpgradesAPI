@@ -1,0 +1,24 @@
+name: GraalVM build
+on: [push, pull_request, workflow_dispatch]
+jobs:
+    build:
+        permissions: write-all
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: graalvm/setup-graalvm@v1
+              with:
+                  java-version: '23'
+                  distribution: 'graalvm'
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Build
+              run: ./gradlew build
+            - name: Release
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: '${{ secrets.GITHUB_TOKEN }}'
+                  automatic_release_tag: latest
+                  prerelease: true
+                  title: Dev Build
+                  files: |
+                      ./upgrades-plugin/build/libs/upgrades-plugin.jar
